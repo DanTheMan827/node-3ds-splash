@@ -1,0 +1,14 @@
+{
+  "name": "3ds-splash",
+  "version": "1.0.0",
+  "description": "Encodes, decodes, and generates previews for the Nintendo 3DS homebrew splash bin format.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "DanTheMan827",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "pngjs": "^3.2.0"
+  }
+}
