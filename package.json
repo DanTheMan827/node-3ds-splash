@@ -4,11 +4,14 @@
   "description": "Encodes, decodes, and generates previews for the Nintendo 3DS homebrew splash bin format.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-docs": "jsdoc2md --template README.template.md index.js > README.md"
   },
   "author": "DanTheMan827",
   "license": "GPL-3.0",
   "dependencies": {
     "pngjs": "^3.2.0"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^3.0.0"
   }
 }

@@ -72,22 +72,146 @@ fs.createReadStream('./top.png')
   });
 ```
 
+# API Reference
 ## Functions
 
-### binToRGBA
+<dl>
+<dt><a href="#binToRGBA">binToRGBA(data)</a> ⇒ <code><a href="#Bitmap">Promise.&lt;Bitmap&gt;</a></code></dt>
+<dd><p>Takes an object with a key named &quot;data&quot; and returns a promise for an object that contains RGBA data instead.</p>
+</dd>
+<dt><a href="#rgbaToPNG">rgbaToPNG(data)</a> ⇒ <code>pngjs.PNG</code></dt>
+<dd><p>Takes a object with RGBA data and returns a pngjs object.</p>
+</dd>
+<dt><a href="#binToPNG">binToPNG(data)</a> ⇒ <code>Promise.&lt;PNG&gt;</code></dt>
+<dd><p>Convenience function for binToRGBA and rgbaToPNG, returns a promise for the data.</p>
+</dd>
+<dt><a href="#rgbaToBin">rgbaToBin(data)</a> ⇒ <code><a href="#Bitmap">Promise.&lt;Bitmap&gt;</a></code></dt>
+<dd><p>Takes a RGBA bitmap object and returns a promise for a BGR888 formatted bitmap.</p>
+</dd>
+<dt><a href="#generatePreviewRGBA">generatePreviewRGBA(rgbaArray)</a> ⇒ <code>Promise.&lt;PNG&gt;</code></dt>
+<dd><p>Takes an array of two pngjs objects or the return values from binToRGBA and returns RGBA for a combined preview image.</p>
+</dd>
+<dt><a href="#generatePreviewPNG">generatePreviewPNG(data)</a> ⇒ <code>Promise.&lt;PNG&gt;</code></dt>
+<dd><p>Convenience function for generatePreviewRGBA and rgbaToPNG.</p>
+</dd>
+<dt><a href="#getBinResolution">getBinResolution(binLength)</a> ⇒ <code><a href="#SizeObject">SizeObject</a></code></dt>
+<dd><p>Returns the resolution based on the bin size provided</p>
+</dd>
+</dl>
+
+## Typedefs
+
+<dl>
+<dt><a href="#Bitmap">Bitmap</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#SizeObject">SizeObject</a> : <code>Object</code></dt>
+<dd></dd>
+</dl>
+
+<a name="binToRGBA"></a>
+
+## binToRGBA(data) ⇒ [<code>Promise.&lt;Bitmap&gt;</code>](#Bitmap)
 Takes an object with a key named "data" and returns a promise for an object that contains RGBA data instead.
 
-### rgbaToPNG
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;Bitmap&gt;</code>](#Bitmap) - A promise containing the RGBA bitmap data  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | [<code>Bitmap</code>](#Bitmap) | The bin bitmap data |
+
+<a name="rgbaToPNG"></a>
+
+## rgbaToPNG(data) ⇒ <code>pngjs.PNG</code>
 Takes a object with RGBA data and returns a pngjs object.
 
-### binToPng
+**Kind**: global function  
+**Returns**: <code>pngjs.PNG</code> - A pngjs PNG object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | [<code>Bitmap</code>](#Bitmap) | The RGBA bitmap |
+
+<a name="binToPNG"></a>
+
+## binToPNG(data) ⇒ <code>Promise.&lt;PNG&gt;</code>
 Convenience function for binToRGBA and rgbaToPNG, returns a promise for the data.
 
-### rgbaToBin
-Takes a pngjs object and returns a promise for an object with BGR (homebrew bin) formatted data in the "data" key.
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;PNG&gt;</code> - A promise for a pngjs PNG object  
 
-### generatePreviewRGBA
+| Param | Type | Description |
+| --- | --- | --- |
+| data | [<code>Bitmap</code>](#Bitmap) | The bin bitmap data |
+
+<a name="rgbaToBin"></a>
+
+## rgbaToBin(data) ⇒ [<code>Promise.&lt;Bitmap&gt;</code>](#Bitmap)
+Takes a RGBA bitmap object and returns a promise for a BGR888 formatted bitmap.
+
+**Kind**: global function  
+**Returns**: [<code>Promise.&lt;Bitmap&gt;</code>](#Bitmap) - A promise for a RGBA bitmap object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | [<code>Bitmap</code>](#Bitmap) | The RGBA bitmap |
+
+<a name="generatePreviewRGBA"></a>
+
+## generatePreviewRGBA(rgbaArray) ⇒ <code>Promise.&lt;PNG&gt;</code>
 Takes an array of two pngjs objects or the return values from binToRGBA and returns RGBA for a combined preview image.
 
-### generatePreviewPNG
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;PNG&gt;</code> - A promise for a pngjs PNG object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| rgbaArray | [<code>Array.&lt;Bitmap&gt;</code>](#Bitmap) | The top and bottom RGBA bitmap objects |
+
+<a name="generatePreviewPNG"></a>
+
+## generatePreviewPNG(data) ⇒ <code>Promise.&lt;PNG&gt;</code>
 Convenience function for generatePreviewRGBA and rgbaToPNG.
+
+**Kind**: global function  
+**Returns**: <code>Promise.&lt;PNG&gt;</code> - A promise for a pngjs PNG object  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| data | [<code>Bitmap</code>](#Bitmap) | The RGBA bitmap |
+
+<a name="getBinResolution"></a>
+
+## getBinResolution(binLength) ⇒ [<code>SizeObject</code>](#SizeObject)
+Returns the resolution based on the bin size provided
+
+**Kind**: global function  
+**Returns**: [<code>SizeObject</code>](#SizeObject) - The image resolution  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| binLength | <code>Integer</code> | The bin data length |
+
+<a name="Bitmap"></a>
+
+## Bitmap : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| data | <code>Buffer</code> | The bitmap Buffer |
+| width | <code>Integer</code> | The image width |
+| height | <code>Integer</code> | The image height |
+
+<a name="SizeObject"></a>
+
+## SizeObject : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type |
+| --- | --- |
+| width | <code>Integer</code> | 
+| height | <code>Integer</code> | 
+

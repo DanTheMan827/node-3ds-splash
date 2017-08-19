@@ -1,5 +1,17 @@
 const PNG = require('pngjs').PNG
 
+/**
+ * @typedef Bitmap
+ * @type {Object}
+ * @property {Buffer} data The bitmap Buffer
+ * @property {Integer} width The image width
+ * @property {Integer} height The image height
+ */
+/**
+ * Takes an object with a key named "data" and returns a promise for an object that contains RGBA data instead.
+ * @param  {Bitmap} data The bin bitmap data
+ * @return {Promise<Bitmap>} A promise containing the RGBA bitmap data
+ */
 function binToRGBA (data) {
   return new Promise(function (resolve, reject) {
     if (!data.width || !data.height) {
@@ -38,6 +50,11 @@ function binToRGBA (data) {
   })
 }
 
+/**
+ * Takes a object with RGBA data and returns a pngjs object.
+ * @param  {Bitmap} data The RGBA bitmap
+ * @return {pngjs.PNG} A pngjs PNG object
+ */
 function rgbaToPNG (data) {
   var png = new PNG({
     width: data.width,
@@ -49,10 +66,20 @@ function rgbaToPNG (data) {
   return png
 }
 
+/**
+ * Convenience function for binToRGBA and rgbaToPNG, returns a promise for the data.
+ * @param  {Bitmap} data The bin bitmap data
+ * @return {Promise<PNG>} A promise for a pngjs PNG object
+ */
 function binToPNG (data) {
   return binToRGBA(data).then(rgbaToPNG)
 }
 
+/**
+ * Takes a RGBA bitmap object and returns a promise for a BGR888 formatted bitmap.
+ * @param  {Bitmap} data The RGBA bitmap
+ * @return {Promise<Bitmap>} A promise for a RGBA bitmap object
+ */
 function rgbaToBin (data) {
   return new Promise(function (resolve, reject) {
     if (!data.data) {
@@ -91,6 +118,11 @@ function rgbaToBin (data) {
   })
 }
 
+/**
+ * Takes an array of two pngjs objects or the return values from binToRGBA and returns RGBA for a combined preview image.
+ * @param  {Array<Bitmap>} rgbaArray The top and bottom RGBA bitmap objects
+ * @return {Promise<PNG>} A promise for a pngjs PNG object
+ */
 function generatePreviewRGBA (rgbaArray) {
   return new Promise(function (resolve, reject) {
     if (rgbaArray.length !== 2) {
@@ -138,12 +170,29 @@ function generatePreviewRGBA (rgbaArray) {
   })
 }
 
+/**
+ * Convenience function for generatePreviewRGBA and rgbaToPNG.
+ * @param  {Bitmap} data The RGBA bitmap
+ * @return {Promise<PNG>} A promise for a pngjs PNG object
+ */
 function generatePreviewPNG (data) {
   return generatePreviewRGBA(data).then(rgbaToPNG)
 }
 
-function getBinResolution (size) {
-  switch (size) {
+/**
+ * @typedef SizeObject
+ * @type {Object}
+ * @property {Integer} width
+ * @property {Integer} height
+ */
+
+/**
+ * Returns the resolution based on the bin size provided
+ * @param  {Integer} binLength The bin data length
+ * @return {SizeObject} The image resolution
+ */
+function getBinResolution (binLength) {
+  switch (binLength) {
     case 288000: return {width: 400, height: 240}
     case 230400: return {width: 320, height: 240}
   }
